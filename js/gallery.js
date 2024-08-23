@@ -64,16 +64,12 @@ const images = [
   },
 ];
 
+const ul = document.querySelector('ul.gallery');
+
 images.forEach((image) => {
-  const ul = document.querySelector('ul.gallery');
   const li = document.createElement('li');
   const a = document.createElement('a');
   const img = document.createElement('img');
-
-  //lightbox ile modal pencere oluşturur
-  const modal = basicLightbox.create(
-    `<img src="${image.original}">Dynamic Content</img>`
-  );
 
   a.href = image.original;
   a.classList.add('gallery-link');
@@ -91,7 +87,12 @@ images.forEach((image) => {
     //linklerin fotoğrafı indirmesini engellemek için
     event.preventDefault();
 
-    //linke tıklanınca modal açılması için
+    //linke tıklanınca modal oluşturulması için
+    const modal = basicLightbox.create(
+      `<img src="${event.target.dataset.source}" />`
+    );
+
+    //modal açılması için
     modal.show();
 
     //modal açıkken esc tuşu ile kapatabilmek  için
